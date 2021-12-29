@@ -1,0 +1,5 @@
+guestbook.main:
+  title: Guest Book
+  menu_name: main
+  route_name: guestbook.main
+  weight: 100

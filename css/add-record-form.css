@@ -1,0 +1,19 @@
+.guestbook-add-record {
+  padding: 20px;
+  border: solid #ccc 1px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.guestbook-add-record .form-item {
+  margin: 0 0 10px 0;
+}
+.guestbook-add-record .form-actions {
+  margin: 0;
+  text-align: right;
+}
+.guestbook-add-record .error-message {
+  color: #dc3545;
+  font-size: 0.85em;
+}
+
+/*# sourceMappingURL=add-record-form.css.map */

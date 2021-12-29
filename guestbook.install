@@ -1,0 +1,149 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Guestbook module.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * Implements hook_schema().
+ */
+function guestbook_schema(): array {
+  $schema['guestbook'] = [
+    'description' => 'Stores user feedback and suggestions.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique record ID.',
+      ],
+      'name' => [
+        'type' => 'varchar',
+        'length' => 100,
+        'not null' => TRUE,
+        'description' => 'Author name.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 320,
+        'not null' => TRUE,
+        'description' => 'Author email.',
+      ],
+      'phone' => [
+        'type' => 'varchar',
+        'length' => 15,
+        'not null' => TRUE,
+        'description' => 'Author phone.',
+      ],
+      'message' => [
+        'type' => 'varchar',
+        'length' => 1000,
+        'not null' => TRUE,
+        'description' => 'The text content of the record.',
+      ],
+      'avatar_fid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'description' => 'The file ID of the author avatar.',
+      ],
+      'attachment_fid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'description' => 'The file ID of the image attached to the record.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'Timestamp when the record was created.',
+      ],
+    ],
+    'primary key' => ['id'],
+  ];
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+function guestbook_install($is_syncing) {
+  $image_style = ImageStyle::create([
+    'name' => 'guestbook_scale_crop_64_64',
+    'label' => 'Scale and crop (64×64) [Module Guestbook]',
+  ]);
+  $image_style->addImageEffect([
+    'id' => 'image_scale_and_crop',
+    'weight' => 0,
+    'data' => [
+      'width' => 64,
+      'height' => 64,
+    ],
+  ]);
+  $image_style->save();
+
+  $image_style = ImageStyle::create([
+    'name' => 'guestbook_scale_200',
+    'label' => 'Scale (200) [Module Guestbook]',
+  ]);
+  $image_style->addImageEffect([
+    'id' => 'image_scale',
+    'weight' => 0,
+    'data' => [
+      'width' => 200,
+    ],
+  ]);
+  $image_style->save();
+
+  $image_style = ImageStyle::create([
+    'name' => 'guestbook_scale_800',
+    'label' => 'Scale (800) [Module Guestbook]',
+  ]);
+  $image_style->addImageEffect([
+    'id' => 'image_scale',
+    'weight' => 0,
+    'data' => [
+      'width' => 800,
+    ],
+  ]);
+  $image_style->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * @throws \Drupal\Core\Entity\EntityStorageException
+ */
+
+function guestbook_uninstall($is_syncing) {
+  try {
+    $query = \Drupal::database()
+      ->select('guestbook', 't')
+      ->fields('t', ['avatar_fid', 'attachment_fid'])
+      ->execute();
+    foreach ($query as $row) {
+      foreach ($row as $fid) {
+        if ($fid) {
+          $file = File::load($fid);
+          $file->setTemporary();
+          $file->save();
+        }
+      }
+    }
+    $custom_styles = [
+      'guestbook_scale_crop_64_64',
+      'guestbook_scale_200',
+    ];
+    foreach ($custom_styles as $image_style) {
+      if ($image_style = ImageStyle::load($image_style)) {
+        $image_style->delete();
+      }
+    }
+  }
+  catch (\Exception $e) {
+  }
+}

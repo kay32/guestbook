@@ -1,0 +1,4 @@
+administer guestbook:
+  title: 'Administer guestbook'
+  description: 'Edit or delete guestbook entries.'
+  restrict access: true

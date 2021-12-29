@@ -1,0 +1,23 @@
+guestbook.main:
+  path: '/guestbook'
+  defaults:
+    _title: 'Guestbook'
+    _controller: '\Drupal\guestbook\Controller\GuestbookController::build'
+  requirements:
+    _permission: 'access content'
+
+guestbook.edit:
+  path: '/guestbook/{id}/edit'
+  defaults:
+    _title: 'Guestbook - Edit'
+    _form: 'Drupal\guestbook\Form\EditRecordForm'
+  requirements:
+    _permission: 'administer guestbook'
+
+guestbook.delete:
+  path: '/guestbook/{id}/delete'
+  defaults:
+    _title: 'Guestbook - Delete'
+    _form: 'Drupal\guestbook\Form\DeleteRecordForm'
+  requirements:
+    _permission: 'administer guestbook'

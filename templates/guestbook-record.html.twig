@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Default theme implementation for views to display rows in a grid.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapping element.
+ * - title: The title of this group of rows.
+ * - view: The view object.
+ * - rows: The rendered view results.
+ * - options: The view plugin style options.
+ *   - row_class_default: A flag indicating whether default classes should be
+ *     used on rows.
+ *   - col_class_default: A flag indicating whether default classes should be
+ *     used on columns.
+ * - items: A list of grid items. Each item contains a list of rows or columns.
+ *   The order in what comes first (row or column) depends on which alignment
+ *   type is chosen (horizontal or vertical).
+ *   - attributes: HTML attributes for each row or column.
+ *   - content: A list of columns or rows. Each row or column contains:
+ *     - attributes: HTML attributes for each row or column.
+ *     - content: The row or column contents.
+ *
+ * @see template_preprocess_views_view_grid()
+ *
+ * @ingroup themeable
+ */
+#}
+<li class="guestbook-record">
+  <div class="guestbook-record__header">
+    <div class="guestbook-record__user-wrapper">
+      <div class="guestbook-record__avatar-wrapper">
+        {% if content.avatar_fid %}
+          {{ content.avatar }}
+        {% else %}
+          <img src="{{ content.avatar }}" width="64" height="64" alt="{{ content.name }}">
+        {% endif %}
+      </div>
+      <div class="guestbook-record__name-wrapper">
+        <div class="guestbook-record__name">{{ content.name }}</div>
+        <div class="guestbook-record__date">{{ content.created|date("m/j/Y H:i:s") }}</div>
+      </div>
+    </div>
+    <div class="guestbook-record__contacts">
+      <div class="guestbook-record__contacts-label">{{ 'Contacts:'|t }}</div>
+      <a href="mailto:{{ content.email }}" target="_blank">{{ content.email }}</a>
+      <a href="tel:{{ content.phone }}">{{ content.phone }}</a>
+    </div>
+  </div>
+  <div class="guestbook-record__body">
+    <div class="guestbook-record__message">{{ content.message }}</div>
+    {% if content.attachment %}
+      <div class="guestbook-record__attachment-wrapper">
+        <div class="guestbook-record__attachment-label">{{ 'Attachments:'|t }}</div>
+        {{ content.attachment }}
+      </div>
+    {% endif %}
+  </div>
+  {% if user.hasPermission('administer guestbook') %}
+    <div class="guestbook-operations">
+      <a href="{{ path('guestbook.edit', {id: content.id}) }}">{{ 'Edit'|t }}</a>
+      <a href="{{ path('guestbook.delete', {id: content.id}) }}">{{ 'Delete'|t }}</a>
+    </div>
+  {% endif %}
+</li>

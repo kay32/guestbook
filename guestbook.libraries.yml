@@ -1,0 +1,12 @@
+# Custom module library for general purposes.
+guestbook:
+  js:
+    js/guestbook.js: { }
+  css:
+    component:
+      css/guestbook.css: { }
+
+add_record_form:
+  css:
+    component:
+      css/add-record-form.css: { }

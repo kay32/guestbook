@@ -1,0 +1,157 @@
+.guestbook-operations {
+  text-align: center;
+  padding: 10px;
+}
+
+.guestbook {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.guestbook * {
+  box-sizing: border-box;
+}
+.guestbook__left-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-left: 10px;
+}
+.guestbook__right-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-right: 10px;
+}
+@media (min-width: 768px) {
+  .guestbook__left-col {
+    flex: 0 0 40%;
+    max-width: 40%;
+    padding-left: 10px;
+  }
+  .guestbook__right-col {
+    flex: 0 0 60%;
+    max-width: 60%;
+    padding-right: 10px;
+  }
+}
+
+.guestbook-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guestbook-record {
+  border: solid #ccc 1px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.guestbook-record__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  padding: 10px;
+  border-bottom: solid #ccc 1px;
+}
+.guestbook-record__user-wrapper {
+  flex: 0 0 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  border-bottom: solid #ccc 1px;
+  padding-bottom: 10px;
+}
+.guestbook-record__avatar-wrapper {
+  width: 66px;
+  height: 66px;
+  border: solid #ccc 1px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.guestbook-record__avatar-wrapper > img {
+  display: block;
+}
+.guestbook-record__name {
+  font-size: 1.5rem;
+}
+.guestbook-record__date {
+  color: #777;
+  font-size: 0.875rem;
+}
+.guestbook-record__contacts {
+  flex: 0 0 100%;
+  max-width: 100%;
+  font-size: 0.875rem;
+  text-align: center;
+}
+.guestbook-record__contacts > a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  padding: 2px 5px;
+  border-radius: 5px;
+  transition: background-color 200ms ease;
+}
+.guestbook-record__contacts > a:hover {
+  background-color: #ccc;
+}
+.guestbook-record__body {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  padding: 10px;
+}
+.guestbook-record__message {
+  flex: 0 0 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+}
+.guestbook-record__attachment-label, .guestbook-record__contacts-label {
+  font-size: 0.85rem;
+  color: #777;
+  text-align: center;
+}
+.guestbook-record__attachment-wrapper {
+  flex: 0 0 100%;
+  max-width: 100%;
+  align-self: center;
+  text-align: center;
+}
+.guestbook-record__attachment-wrapper > a {
+  display: inline-block;
+}
+.guestbook-record__attachment-wrapper > a > img {
+  display: block;
+}
+@media (min-width: 768px) {
+  .guestbook-record__user-wrapper {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding-right: 10px;
+    justify-content: flex-start;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .guestbook-record__contacts {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-left: 10px;
+    border-left: solid #ccc 1px;
+  }
+  .guestbook-record__message {
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding-right: 10px;
+  }
+  .guestbook-record__attachment-wrapper {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-left: 10px;
+    border-left: solid #ccc 1px;
+  }
+}
+
+/*# sourceMappingURL=guestbook.css.map */
