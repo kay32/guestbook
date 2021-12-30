@@ -2,7 +2,6 @@
 
 namespace Drupal\guestbook\Controller;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Extension\ExtensionList;
@@ -10,7 +9,6 @@ use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Url;
 use Drupal\file\Entity\File;
 use Drupal\guestbook\Form\AddRecordForm;
-use Drupal\image\Entity\ImageStyle;
 use PDO;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
